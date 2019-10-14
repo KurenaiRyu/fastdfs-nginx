@@ -2,20 +2,26 @@ version: '3'
 services:
   tracker:
     container_name: tracker
-    image: ygqygq2/fastdfs-nginx
+    build: .
+    image: iotlead/fastdfs-nginx
     command: tracker
     network_mode: host
     volumes:   
-      - /var/fdfs/tracker:/var/fdfs    
+      - /home/devs/docker/fdfs/tracker:/var/fdfs
+#      - /home/devs/docker/fdfs/nginx_conf/conf.d:/nginx_conf/
+#      - /home/devs/docker/fdfs/nginx_conf/nginx.conf:/usr/local/nginx/conf/nginx.conf:ro
   storage0:
     container_name: storage0
-    image: ygqygq2/fastdfs-nginx
+    build: .
+    image: iotlead/fastdfs-nginx
     command: storage
     network_mode: host  
     environment:
-      - TRACKER_SERVER=10.1.5.85:22122
+      - TRACKER_SERVER=192.168.8.252:22122
     volumes: 
-      - /var/fdfs/storage0:/var/fdfs
+      - /home/devs/docker/fdfs/storage0:/var/fdfs
+#      - /home/devs/docker/fdfs/nginx_conf/conf.d:/nginx_conf/
+#      - /home/devs/docker/fdfs/nginx_conf/nginx.conf:/usr/local/nginx/conf/nginx.conf:ro
   # storage1:
   #   container_name: storage1
   #   image: ygqygq2/fastdfs-nginx
