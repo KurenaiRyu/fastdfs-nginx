@@ -8,7 +8,7 @@ services:
     network_mode: host
     volumes:   
       - /home/devs/docker/fdfs/tracker:/var/fdfs
-#      - /home/devs/docker/fdfs/nginx_conf/conf.d:/nginx_conf/
+#      - /home/devs/docker/fdfs/nginx_conf/conf.d:/nginx_conf/conf.d
 #      - /home/devs/docker/fdfs/nginx_conf/nginx.conf:/usr/local/nginx/conf/nginx.conf:ro
   storage0:
     container_name: storage0
@@ -20,7 +20,7 @@ services:
       - TRACKER_SERVER=192.168.8.252:22122
     volumes: 
       - /home/devs/docker/fdfs/storage0:/var/fdfs
-#      - /home/devs/docker/fdfs/nginx_conf/conf.d:/nginx_conf/
+#      - /home/devs/docker/fdfs/nginx_conf/conf.d:/nginx_conf/conf.d
 #      - /home/devs/docker/fdfs/nginx_conf/nginx.conf:/usr/local/nginx/conf/nginx.conf:ro
   # storage1:
   #   container_name: storage1
