@@ -1,6 +1,13 @@
 #!/bin/bash
 #set -e
 
+mkdir -p /opt/fdfs/data/group1/M00
+mkdir -p /opt/fdfs/data/group1/M01
+mkdir -p /opt/fdfs/data/group1/M02
+ln -s /var/fdfs/data/* /opt/fdfs/data/group1/M00
+ln -s /var/fdfs/data/* /opt/fdfs/data/group1/M01
+ln -s /var/fdfs/data/* /opt/fdfs/data/group1/M02
+
 GROUP_NAME=${GROUP_NAME:-group1}
 if [ -n "$GET_TRACKER_SERVER" ]; then
     export TRACKER_SERVER=$(eval $GET_TRACKER_SERVER)

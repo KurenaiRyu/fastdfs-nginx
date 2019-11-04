@@ -11,13 +11,14 @@ ENV FASTDFS_PATH=/opt/fdfs \
     TRACKER_SERVER=
 
 #get all the dependences and nginx
-RUN yum install -y git gcc make wget pcre pcre-devel openssl openssl-devel \
+RUN yum install -y git gcc make wget automake autoconf m4 pcre pcre-devel gd-devel libcurl-devel openssl openssl-devel \
   && rm -rf /var/cache/yum/*
 
 #create the dirs to store the files downloaded from internet
 RUN mkdir -p ${FASTDFS_PATH}/libfastcommon \
  && mkdir -p ${FASTDFS_PATH}/fastdfs \
  && mkdir -p ${FASTDFS_PATH}/fastdfs-nginx-module \
+ && mkdir -p ${FASTDFS_PATH}/ngx_image_thumb \
  && mkdir ${FASTDFS_BASE_PATH}
 
 #compile the libfastcommon
@@ -42,14 +43,17 @@ WORKDIR ${FASTDFS_PATH}/fastdfs-nginx-module
 # nginx url: https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 # tengine url: http://tengine.taobao.org/download/tengine-${TENGINE_VERSION}.tar.gz
 RUN git clone --depth 1 https://github.com/happyfish100/fastdfs-nginx-module.git ${FASTDFS_PATH}/fastdfs-nginx-module \
+ && git clone --depth 1 https://github.com/oupula/ngx_image_thumb.git ${FASTDFS_PATH}/ngx_image_thumb \
  && wget http://tengine.taobao.org/download/tengine-${TENGINE_VERSION}.tar.gz \
  && tar -zxf tengine-${TENGINE_VERSION}.tar.gz \
  && cd tengine-${TENGINE_VERSION} \
  && ./configure --prefix=/usr/local/nginx --add-module=${FASTDFS_PATH}/fastdfs-nginx-module/src/ \
+ --add-module=${FASTDFS_PATH}/ngx_image_thumb \
  && make \
  && make install \
  && ln -s /usr/local/nginx/sbin/nginx /usr/bin/ \
  && rm -rf ${FASTDFS_PATH}/fastdfs-nginx-module \
+ && rm -rf ${FASTDFS_PATH}/ngx_image_thumb \
 
 EXPOSE 22122 23000 8080 8888 80
 VOLUME ["$FASTDFS_BASE_PATH","/etc/fdfs","/usr/local/nginx/conf/conf.d"]   
