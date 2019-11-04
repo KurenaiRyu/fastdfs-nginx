@@ -28,11 +28,15 @@ ENV FASTDFS_PATH=/opt/fdfs \
 如上面代码所示，在[Dockerfile](docker/Dockerfile)中，没有获取最新发布的版本，而是指定某个版本号，更新版本需要手动更新  
 ### Nginx和Tengine的切换
 ```
-wget http://tengine.taobao.org/download/tengine-${TENGINE_VERSION}.tar.gz
+ && wget http://tengine.taobao.org/download/tengine-${TENGINE_VERSION}.tar.gz
+ && tar -zxf tengine-${TENGINE_VERSION}.tar.gz \
+ && cd tengine-${TENGINE_VERSION} \
 ```
 默认使用Tengine，要切换为Nginx则将上面代码替换成下面的代码(直接全局搜索替换即可，因为只会搜到一条)
 ```
-wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
+ && wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
+ && tar -zxf nginx-${TENGINE_VERSION}.tar.gz \
+ && cd nginx-${TENGINE_VERSION} \
 ```
 ## Docker-compose Usage
 [docker-compose](docker/docker-compose.yml)中storage0环境变量`TRACKER_SERVER`修改为部署后能够访问tracker的地址  
