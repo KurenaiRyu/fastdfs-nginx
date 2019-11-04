@@ -3,43 +3,39 @@ services:
   tracker:
     container_name: tracker
     build: .
-    image: iotlead/fastdfs-nginx
+    image: natsusai/fastdfs-nginx
     command: tracker
     network_mode: host
     volumes:   
-      - /home/devs/docker/fdfs/tracker:/var/fdfs
-#      - /home/devs/docker/fdfs/nginx_conf/conf.d:/nginx_conf/conf.d
-#      - /home/devs/docker/fdfs/nginx_conf/nginx.conf:/usr/local/nginx/conf/nginx.conf:ro
+      - /var/fdfs/tracker:/var/fdfs
   storage0:
     container_name: storage0
     build: .
-    image: iotlead/fastdfs-nginx
+    image: natsusai/fastdfs-nginx
     command: storage
     network_mode: host  
     environment:
-      - TRACKER_SERVER=192.168.8.252:22122
+      - TRACKER_SERVER=192.168.1.25:22122
     volumes: 
-      - /home/devs/docker/fdfs/storage0:/var/fdfs
-#      - /home/devs/docker/fdfs/nginx_conf/conf.d:/nginx_conf/conf.d
-#      - /home/devs/docker/fdfs/nginx_conf/nginx.conf:/usr/local/nginx/conf/nginx.conf:ro
+      - /var/fdfs/storage0:/var/fdfs
   # storage1:
   #   container_name: storage1
-  #   image: ygqygq2/fastdfs-nginx
+  #   image: natsusai/fastdfs-nginx
   #   command: storage
   #   network_mode: host  
   #   environment:
-  #     - TRACKER_SERVER=10.1.5.85:22122
+  #     - TRACKER_SERVER=192.168.1.25:22122
   #   volumes: 
   #     - /var/fdfs/storage1:/var/fdfs
   #  storage2:
   #   container_name: storage2
-  #   image: ygqygq2/fastdfs-nginx
+  #   image: natsusai/fastdfs-nginx
   #   command: storage
   #   network_mode: host  
   #   environment:
-  #     - TRACKER_SERVER=10.1.5.85:22122
+  #     - TRACKER_SERVER=192.168.1.25:22122
   #     - GROUP_NAME=group2
   #     - PORT=24000
   #   volumes: 
-  #     - /var/fdfs/storage2:/var/fdfs           
+  #     - /var/fdfs/storage2:/var/fdfs
                     
