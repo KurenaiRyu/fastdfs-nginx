@@ -3,7 +3,7 @@ forked from [ygqygq2/fastdfs-nginx](https://github.com/ygqygq2/fastdfs-nginx)
 
 [FastDFS](https://github.com/happyfish100/fastdfs)  
 
-**默认分支`master`并未整合缩略图模块，请转至`image-thumb`分支查看详情**
+**默认分支`master`已整合缩略图模块，需要未整合缩略图模块请转至`整合no-image-thumb`分支查看详情**
 在原项目已将tracker，storage和nginx进行了整合的基础上，添加docker-compose配置，以及添加nginx第三方模块[ngx_image_thumb
 ](https://github.com/oupula/ngx_image_thumb)作为缩略图处理方案
 
